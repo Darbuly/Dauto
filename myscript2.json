@@ -1,0 +1,36 @@
+{
+    "scripName":"测试脚本2",
+    "breathTime":1000,
+    "initScreen":0,
+    "main":[
+        {
+            "type":"DEBUG",
+            "title":"debug 测试1"
+        },
+        {
+            "type":"TOUCH",
+            "title":"点击",
+            "data":{
+                "x":165, 
+                "y":1395
+            }
+        },
+         {
+            "type":"TOUCH_MOVE",
+            "title":"拖动",
+            "data":{
+                "x1":165, 
+                "y1":1395,
+                "x2":165, 
+                "y2":500
+            }
+        },
+         {
+            "type":"TIMER",
+            "title":"等待2秒",
+            "data":{
+                "time":2000
+            }
+        }
+        ]
+}

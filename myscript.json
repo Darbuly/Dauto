@@ -1,0 +1,21 @@
+{
+    "scripName":"测试脚本",
+    "breathTime":1000,
+    "main":[
+        {
+            "type":"DEBUG",
+            "title":"debug 测试1"
+        },
+        {
+            "type":"DEBUG",
+            "title":"debug 测试2"
+        },
+         {
+            "type":"TIMER",
+            "title":"等待2秒",
+            "data":{
+                "time":2000
+            }
+        }
+        ]
+}
