@@ -1,36 +1,51 @@
 {
-    "scripName":"测试脚本2",
-    "breathTime":1000,
-    "initScreen":0,
-    "main":[
-        {
-            "type":"DEBUG",
-            "title":"debug 测试1"
-        },
-        {
-            "type":"TOUCH",
-            "title":"点击",
-            "data":{
-                "x":165, 
-                "y":1395
-            }
-        },
-         {
-            "type":"TOUCH_MOVE",
-            "title":"拖动",
-            "data":{
-                "x1":165, 
-                "y1":1395,
-                "x2":165, 
-                "y2":500
-            }
-        },
-         {
-            "type":"TIMER",
-            "title":"等待2秒",
-            "data":{
-                "time":2000
-            }
-        }
-        ]
+	"scripName": "测试脚本2",
+	"breathTime": 100,
+	"initScreen": 0,
+	"main": [{
+			"type": "DEBUG",
+			"title": "debug 测试1"
+		},
+		{
+			"type": "WHILE_CONTROLLER",
+			"title": "不停拖动",
+			"data": {
+			    "until_var":"stop1",
+				"main": [{
+					"type": "TOUCH_MOVE",
+					"title": "拖动1",
+					"data": {
+						"x1": 865,
+						"y1": 977,
+						"x2": 214,
+						"y2": 977
+					}
+				},{
+					"type": "SETVAR",
+					"title": "设置判断条件",
+					"data": {
+					    "input_var":"stop1"
+					}
+				}]
+			}
+		},
+		{
+			"type": "TOUCH_MOVE",
+			"title": "拖动",
+			"data": {
+				"x1": 865,
+				"y1": 977,
+				"x2": 214,
+				"y2": 977
+			}
+		},
+
+		{
+			"type": "TIMER",
+			"title": "等待2秒",
+			"data": {
+				"time": 2000
+			}
+		}
+	]
 }
