@@ -20,6 +20,12 @@
 						"x2": 214,
 						"y2": 977
 					}
+				},{
+					"type": "SETVAR",
+					"title": "设置判断条件",
+					"data": {
+					    "input_var":"stop1"
+					}
 				},
 				{
 					"type": "IF_TIME",

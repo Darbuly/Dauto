@@ -117,6 +117,36 @@ function WHILE_CONTROLLER(mainObj)
     end
 end
 
+
+-- 时间判断
+function IF_TIME(mainObj)
+    if (not(mainObj.data) 
+        or not(mainObj.data.input_var) 
+        or not(mainObj.data.year)
+        or not(mainObj.data.month) 
+        or not(mainObj.data.day) 
+        or not(mainObj.data.hour) 
+        or not(mainObj.data.min) 
+        or not(mainObj.data.sec) 
+        or not(type(mainObj.data.year)=='number'))
+    then
+            Dlog('IF_TIME 参数错误')
+        else
+            local setedtime = os.time({
+                year=mainObj.data.year,
+                month=mainObj.data.month,
+                day=mainObj.data.day,
+                hour=mainObj.data.hour,
+                min=mainObj.data.min,
+                sec=mainObj.data.sec})
+            if (setedtime == os.time()) 
+            then
+                 VARS[mainObj.data.input_var]=true
+            end
+    end
+end
+
+
 snum = 1
 function SETVAR(mainObj)
 	if (not(mainObj.data) or not(mainObj.data.input_var) or not(type(mainObj.data.input_var)=='string'))
@@ -140,6 +170,7 @@ doThing = {
 	TOUCH_MOVE = TOUCH_MOVE,
 	REPEAT_CONTROLLER = REPEAT_CONTROLLER,
 	SETVAR = SETVAR,
-	WHILE_CONTROLLER = WHILE_CONTROLLER
+	WHILE_CONTROLLER = WHILE_CONTROLLER,
+	IF_TIME = IF_TIME
 }
  
