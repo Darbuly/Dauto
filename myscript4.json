@@ -1,0 +1,59 @@
+{
+	"scripName": "测试脚本2",
+	"breathTime": 100,
+	"initScreen": 0,
+	"main": [{
+			"type": "DEBUG",
+			"title": "debug 测试1"
+		},
+		{
+			"type": "WHILE_CONTROLLER",
+			"title": "不停拖动",
+			"data": {
+			    "until_var":"stop1",
+				"main": [{
+					"type": "TOUCH_MOVE",
+					"title": "拖动1",
+					"data": {
+						"x1": 865,
+						"y1": 977,
+						"x2": 214,
+						"y2": 977
+					}
+				},
+				{
+					"type": "IF_TIME",
+					"title": "时间判断条件",
+					"data": {
+					    "input_var":"stop1",
+					    "year":2021,
+					    "month":2,
+					    "day":28,
+					    "hour":23,
+					    "min":37,
+					    "sec":0
+					}
+				}
+				]
+			}
+		},
+		{
+			"type": "TOUCH_MOVE",
+			"title": "拖动",
+			"data": {
+				"x1": 865,
+				"y1": 977,
+				"x2": 214,
+				"y2": 977
+			}
+		},
+
+		{
+			"type": "TIMER",
+			"title": "等待2秒",
+			"data": {
+				"time": 2000
+			}
+		}
+	]
+}

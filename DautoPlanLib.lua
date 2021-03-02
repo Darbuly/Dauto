@@ -146,7 +146,140 @@ function IF_TIME(mainObj)
     end
 end
 
+-- 区域单点找色点击
+function IF_ONECOLOR_HIT(mainObj)
+    if (not(mainObj.data) 
+        or not(mainObj.data.color) 
+        or not(mainObj.data.x1)
+        or not(mainObj.data.y1) 
+        or not(mainObj.data.x2) 
+        or not(mainObj.data.y2) )
+    then
+            Dlog('IF_ONECOLOR_HIT 参数错误')
+        else
+            local x,y = findColorInRegionFuzzy(
+                mainObj.data.color,
+                DEFAULT_COLOR_DEGREE,
+                mainObj.data.x1,
+                mainObj.data.y1,
+                mainObj.data.x2,
+                mainObj.data.y2)
+            if x >-1 or y > -1 then
+                Dlog('找到点 ('..x..','..y..')了')
+                touchDown(0,x,y)
+                mSleep(DEFAULT_HIT_TIME)
+                touchUp(0,x,y)
+            end
+           
+    end
+end
 
+--区域多点找色点击
+function IF_MORECOLOR_HIT(mainObj)
+    if (not(mainObj.data) 
+        or not(mainObj.data.color) 
+        or not(mainObj.data.others) 
+        or not(mainObj.data.x1)
+        or not(mainObj.data.y1) 
+        or not(mainObj.data.x2) 
+        or not(mainObj.data.y2) )
+    then
+            Dlog('IF_MORECOLOR_HIT 参数错误')
+        else
+            local x,y = findMultiColorInRegionFuzzy( 
+                mainObj.data.color, 
+                mainObj.data.others, 
+                DEFAULT_COLOR_DEGREE,
+                mainObj.data.x1,
+                mainObj.data.y1,
+                mainObj.data.x2,
+                mainObj.data.y2)
+            if x >-1 or y > -1 then
+                Dlog('找到点 ('..x..','..y..')了')
+                touchDown(0,x,y)
+                mSleep(DEFAULT_HIT_TIME)
+                touchUp(0,x,y)
+            end
+           
+    end
+end
+--区域单点找色执行
+function IF_ONECOLOR_DO(mainObj)
+    if (not(mainObj.data) 
+        or not(mainObj.data.main) 
+        or not(mainObj.data.color) 
+        or not(mainObj.data.x1)
+        or not(mainObj.data.y1) 
+        or not(mainObj.data.x2) 
+        or not(mainObj.data.y2) )
+    then
+            Dlog('IF_ONECOLOR_DO 参数错误')
+        else
+            local x,y = findColorInRegionFuzzy(
+                mainObj.data.color,
+                DEFAULT_COLOR_DEGREE,
+                mainObj.data.x1,
+                mainObj.data.y1,
+                mainObj.data.x2,
+                mainObj.data.y2)
+            if x >-1 or y > -1 then
+                --准备main
+                local sub_main = mainObj.data.main;
+                 for i=1,#sub_main,1 do
+                    if doThing[sub_main[i].type] 
+                    then
+                        mSleep(scriptBreathTime)
+                        local fn = doThing[sub_main[i].type]
+                        fn(sub_main[i])
+                        else
+                            Dlog('动作参数错误：动作 '..sub_main[i].title.." 不存在")
+                    end
+                 end
+
+            end
+           
+    end
+end
+
+--区域多点找色执行
+function IF_MORECOLOR_DO(mainObj)
+    if (not(mainObj.data) 
+        or not(mainObj.data.main) 
+        or not(mainObj.data.others) 
+        or not(mainObj.data.color) 
+        or not(mainObj.data.x1)
+        or not(mainObj.data.y1) 
+        or not(mainObj.data.x2) 
+        or not(mainObj.data.y2) )
+    then
+            Dlog('IF_MORECOLOR_DO 参数错误')
+        else
+            local x,y = findMultiColorInRegionFuzzy( 
+                mainObj.data.color, 
+                mainObj.data.others, 
+                DEFAULT_COLOR_DEGREE,
+                mainObj.data.x1,
+                mainObj.data.y1,
+                mainObj.data.x2,
+                mainObj.data.y2)
+            if x >-1 or y > -1 then
+                --准备main
+                local sub_main = mainObj.data.main;
+                 for i=1,#sub_main,1 do
+                    if doThing[sub_main[i].type] 
+                    then
+                        mSleep(scriptBreathTime)
+                        local fn = doThing[sub_main[i].type]
+                        fn(sub_main[i])
+                        else
+                            Dlog('动作参数错误：动作 '..sub_main[i].title.." 不存在")
+                    end
+                 end
+
+            end
+           
+    end
+end
 snum = 1
 function SETVAR(mainObj)
 	if (not(mainObj.data) or not(mainObj.data.input_var) or not(type(mainObj.data.input_var)=='string'))
@@ -163,6 +296,7 @@ function SETVAR(mainObj)
     end
 end
  
+ 
 doThing = {
 	DEBUG = DEBUG,
 	TIMER = TIMER,
@@ -171,6 +305,10 @@ doThing = {
 	REPEAT_CONTROLLER = REPEAT_CONTROLLER,
 	SETVAR = SETVAR,
 	WHILE_CONTROLLER = WHILE_CONTROLLER,
-	IF_TIME = IF_TIME
+	IF_TIME = IF_TIME,
+	IF_ONECOLOR_HIT = IF_ONECOLOR_HIT,
+	IF_MORECOLOR_HIT = IF_MORECOLOR_HIT,
+	IF_ONECOLOR_DO = IF_ONECOLOR_DO,
+	IF_MORECOLOR_DO = IF_MORECOLOR_DO
 }
  
