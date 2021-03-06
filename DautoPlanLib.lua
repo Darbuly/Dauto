@@ -42,6 +42,11 @@ function TOUCH_MOVE(mainObj)
     end
 end
 
+-- 回退一步
+function BACK(mainObj)
+    os.execute("input keyevent KEYCODE_BACK")
+end
+
 -- REPEAT循环控制器
 function REPEAT_CONTROLLER(mainObj)
     if (not(mainObj.data) or not(mainObj.data.until_var) or not(mainObj.data.main))
@@ -50,8 +55,6 @@ function REPEAT_CONTROLLER(mainObj)
         else
         --准备停止变量
         VARS[mainObj.data.until_var] = false;
-        nLog('VARS[mainObj.data.until_var] ')
-        nLog(VARS[mainObj.data.until_var])
         
         --准备main
         local sub_main = mainObj.data.main;
@@ -71,8 +74,6 @@ function REPEAT_CONTROLLER(mainObj)
                 end
                 
              end
-             nLog('结束了')
-             nLog(VARS[mainObj.data.until_var])
              
         --结束循环体
         until true==VARS[mainObj.data.until_var]
@@ -87,8 +88,6 @@ function WHILE_CONTROLLER(mainObj)
         else
         --准备停止变量
         VARS[mainObj.data.until_var] = false;
-        nLog('VARS[mainObj.data.until_var] ')
-        nLog(VARS[mainObj.data.until_var])
         
         --准备main
         local sub_main = mainObj.data.main;
@@ -108,8 +107,6 @@ function WHILE_CONTROLLER(mainObj)
                 end
                 
              end
-             nLog('结束了')
-             nLog(VARS[mainObj.data.until_var])
              
         --结束循环体
         end
@@ -146,6 +143,34 @@ function IF_TIME(mainObj)
     end
 end
 
+-- 条件控制器
+function IF_CONTROLLER(mainObj)
+    if (not(mainObj.data) 
+        or not(mainObj.data.ifnot) 
+        or not(mainObj.data.input_var)
+        or not(mainObj.data.main)  )
+    then
+            Dlog('IF_CONTROLLER 参数错误')
+        else
+            if (mainObj.data.ifnot==false and VARS[mainObj.data.input_var]==true)
+            or (mainObj.data.ifnot==true and not(VARS[mainObj.data.input_var]==true))
+            then
+                --准备main
+                local sub_main = mainObj.data.main;
+                 for i=1,#sub_main,1 do
+                    if doThing[sub_main[i].type] 
+                    then
+                        mSleep(scriptBreathTime)
+                        local fn = doThing[sub_main[i].type]
+                        fn(sub_main[i])
+                        else
+                            Dlog('动作参数错误：动作 '..sub_main[i].title.." 不存在")
+                    end
+                 end
+            end
+    end
+end
+
 -- 区域单点找色点击
 function IF_ONECOLOR_HIT(mainObj)
     if (not(mainObj.data) 
@@ -157,6 +182,7 @@ function IF_ONECOLOR_HIT(mainObj)
     then
             Dlog('IF_ONECOLOR_HIT 参数错误')
         else
+            
             local x,y = findColorInRegionFuzzy(
                 mainObj.data.color,
                 DEFAULT_COLOR_DEGREE,
@@ -165,7 +191,7 @@ function IF_ONECOLOR_HIT(mainObj)
                 mainObj.data.x2,
                 mainObj.data.y2)
             if x >-1 or y > -1 then
-                Dlog('找到点 ('..x..','..y..')了')
+                Dlog(mainObj.title..': ('..x..','..y..')')
                 touchDown(0,x,y)
                 mSleep(DEFAULT_HIT_TIME)
                 touchUp(0,x,y)
@@ -195,7 +221,6 @@ function IF_MORECOLOR_HIT(mainObj)
                 mainObj.data.x2,
                 mainObj.data.y2)
             if x >-1 or y > -1 then
-                Dlog('找到点 ('..x..','..y..')了')
                 touchDown(0,x,y)
                 mSleep(DEFAULT_HIT_TIME)
                 touchUp(0,x,y)
@@ -286,13 +311,7 @@ function SETVAR(mainObj)
     then
             Dlog('SETVAR 参数错误')
         else
-            snum = snum + 1
-            if (snum == 8  )
-            then
-                VARS[mainObj.data.input_var]=true
-                Dlog('完成800次判断了')
-            end
-            
+            VARS[mainObj.data.input_var]=true
     end
 end
  
@@ -305,10 +324,12 @@ doThing = {
 	REPEAT_CONTROLLER = REPEAT_CONTROLLER,
 	SETVAR = SETVAR,
 	WHILE_CONTROLLER = WHILE_CONTROLLER,
+	IF_CONTROLLER = IF_CONTROLLER,
 	IF_TIME = IF_TIME,
 	IF_ONECOLOR_HIT = IF_ONECOLOR_HIT,
 	IF_MORECOLOR_HIT = IF_MORECOLOR_HIT,
 	IF_ONECOLOR_DO = IF_ONECOLOR_DO,
-	IF_MORECOLOR_DO = IF_MORECOLOR_DO
+	IF_MORECOLOR_DO = IF_MORECOLOR_DO,
+	BACK = BACK
 }
  

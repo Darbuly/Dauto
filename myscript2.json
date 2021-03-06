@@ -6,66 +6,183 @@
 			"type": "DEBUG",
 			"title": "debug 测试1"
 		},
-	
+		
+		
+		{
+			"type": "WHILE_CONTROLLER",
+			"title": "不停",
+			"data": {
+				"until_var": "stop1",
+				"main": [{
+					"type": "IF_ONECOLOR_DO",
+					"title": "找小说页面",
+					"data": {
+						"main": [
+						    
+
+						    
+						    
+							{
+								"type": "WHILE_CONTROLLER",
+								"title": "不停执行",
+								"data": {
+									"until_var": "stop1",
+									"main": [{
+											"type": "IF_CONTROLLER",
+											"title": "首次任务",
+											"data": {
+												"input_var": "isrenwu",
+												"ifnot": true,
+												"main": [
+                                                     {
+                                                    	"type": "IF_ONECOLOR_HIT",
+                                                    	"title": "点击金币",
+                                                    	"data": {
+                                                                "color": "0xd7d0bc",
+                                                    			"x1": 954,
+                                                    			"y1": 59,
+                                                    			"x2": 993,
+                                                    			"y2": 91
+                                                    	}
+                                                    },
+												    {
+														"type": "DEBUG",
+														"title": "进来签到任务"
+													},
+													{
+														"type": "WHILE_CONTROLLER",
+														"title": "不停",
+														"data": {
+															"until_var": "stop_qiandao",
+															"main": [{
+																"type": "IF_MORECOLOR_DO",
+																"title": "找签到页面",
+																"data": {
+																	"main": [{
+																			"type": "DEBUG",
+																			"title": "检测到可以签到"
+																		},
+																		{
+																			"type": "IF_MORECOLOR_HIT",
+																			"title": "点击签到",
+																			"data": {
+																				"color": "0x724400",
+																				"others": "0|-5|0xfad97e,-1|6|0xfad97e",
+																				"x1": 299,
+																				"y1": 1283,
+																				"x2": 762,
+																				"y2": 1443
+																			}
+																		},
+																		{
+																			"type": "TIMER",
+																			"title": "等待1秒",
+																			"data": {
+																				"time": 1000
+																			}
+																		},
+																		{
+																			"type": "SETVAR",
+																			"title": "设置已签到",
+																			"data": {
+																				"input_var": "stop_qiandao"
+																			}
+																		},
+																		{
+																			"type": "BACK",
+																			"title": "回退一步"
+																		}
+																	],
+																	"color": "0x724400",
+																	"others": "0|-5|0xfad97e,-1|6|0xfad97e",
+																	"x1": 299,
+																	"y1": 1283,
+																	"x2": 762,
+																	"y2": 1443
+																}
+															}]
+														}
+													},
+													{
+														"type": "TIMER",
+														"title": "等待1秒",
+														"data": {
+															"time": 1000
+														}
+													},
+													{
+														"type": "BACK",
+														"title": "回到小说页面"
+													},
+													{
+														"type": "SETVAR",
+														"title": "完成任务",
+														"data": {
+															"input_var": "isrenwu"
+														}
+													}
+												]
+											}
+										},
+										{
+											"type": "IF_ONECOLOR_DO",
+											"title": "不停刷小说",
+											"data": {
+												"main": [{
+													"type": "TOUCH_MOVE",
+													"title": "刷小说",
+													"data": {
+														"x1": 865,
+														"y1": 977,
+														"x2": 214,
+														"y2": 977
+													}
+												}],
+												"color": "0xd7d0bc",
+												"x1": 778,
+												"y1": 33,
+												"x2": 872,
+												"y2": 115
+											}
+										}
+									]
+								}
+							}
+						],
+						"color": "0xd7d0bc",
+						"x1": 778,
+						"y1": 33,
+						"x2": 872,
+						"y2": 115
+					}
+				}]
+			}
+		},
 		{
 			"type": "WHILE_CONTROLLER",
 			"title": "不停拖动",
 			"data": {
-			    "until_var":"stop1",
+				"until_var": "stop1",
 				"main": [
-				    	{
+				    {
 					"type": "IF_ONECOLOR_DO",
-					"title": "区域单点找色执行",
+					"title": "不停刷小说",
 					"data": {
-					    "main": [{
-                    			"type": "DEBUG",
-                    			"title": "区域单点找色执行 执行找到了"
-                    		}],
-					    "color":"0x1866ff",
-					    "x1":877,
-					    "y1":853,
-					    "x2":1062,
-					    "y2":1031
-					}
-				},
-				{
-					"type": "IF_MORECOLOR_DO",
-					"title": "区域多点找色执行",
-					"data": {
-					    "main": [{
-                    			"type": "DEBUG",
-                    			"title": "区域单多点找色执行 执行找到了"
-                    		}],
-					   "color":"0xf2371e",
-					    "others":"-23|4|0xffffff,15|29|0xeef1ec",
-					    "x1":917,
-					    "y1":1527,
-					    "x2":1067,
-					    "y2":1675
-					}
-				},
-				
-				{
-					"type": "IF_ONECOLOR_HIT",
-					"title": "区域单点找色点击",
-					"data": {
-					    "color":"0x7091af",
-					    "x1":64,
-					    "y1":1295,
-					    "x2":319,
-					    "y2":1531
-					}
-				},
-				{
-					"type": "IF_MORECOLOR_HIT",
-					"title": "区域多点找色点击",
-					"data": {
-					    "color":"0xec2700",
-					    "others":"67|-1|0xb2b2b2,51|-17|0xb2b2b2",
-					    "x1":768,
-					    "y1":344,
-					    "x2":1070,
-					    "y2":558
+						"main": [{
+							"type": "TOUCH_MOVE",
+							"title": "刷小说",
+							"data": {
+								"x1": 865,
+								"y1": 977,
+								"x2": 214,
+								"y2": 977
+							}
+						}],
+						"color": "0xd7d0bc",
+						"x1": 778,
+						"y1": 33,
+						"x2": 872,
+						"y2": 115
 					}
 				}
 				]
