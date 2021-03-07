@@ -1,208 +1,365 @@
 {
 	"scripName": "测试脚本2",
-	"breathTime": 100,
+	"breathTime": 50,
 	"initScreen": 0,
 	"main": [{
 			"type": "DEBUG",
 			"title": "debug 测试1"
 		},
-		
-		
+		{
+		    "type":"RUNAPPPACKAGE",
+		    "title": "启动主app",
+			"data": {
+			    "package_name":"com.dragon.read"
+			}
+		},
 		{
 			"type": "WHILE_CONTROLLER",
 			"title": "不停",
 			"data": {
 				"until_var": "stop1",
-				"main": [{
-					"type": "IF_ONECOLOR_DO",
-					"title": "找小说页面",
-					"data": {
-						"main": [
-						    
-
-						    
-						    
-							{
-								"type": "WHILE_CONTROLLER",
-								"title": "不停执行",
-								"data": {
-									"until_var": "stop1",
-									"main": [{
-											"type": "IF_CONTROLLER",
-											"title": "首次任务",
-											"data": {
-												"input_var": "isrenwu",
-												"ifnot": true,
-												"main": [
-                                                     {
-                                                    	"type": "IF_ONECOLOR_HIT",
-                                                    	"title": "点击金币",
-                                                    	"data": {
-                                                                "color": "0xd7d0bc",
-                                                    			"x1": 954,
-                                                    			"y1": 59,
-                                                    			"x2": 993,
-                                                    			"y2": 91
-                                                    	}
-                                                    },
-												    {
-														"type": "DEBUG",
-														"title": "进来签到任务"
-													},
-													{
-														"type": "WHILE_CONTROLLER",
-														"title": "不停",
+				"main": [
+				    {
+						"type": "IF_ONECOLOR_DO",
+						"title": "找小说页面",
+						"data": {
+							"color": "0xd7d0bc",
+							"x1": 778,
+							"y1": 33,
+							"x2": 872,
+							"y2": 115,
+							"main": [
+							    {
+									"type": "DO_EVERY",
+									"title": "每60秒运行一次看宝箱任务",
+									"data": {
+										"timer": 60,
+										"name": "every3sec",
+										"main": [{
+												"type": "DEBUG",
+												"title": "每1分钟执行一次看宝箱任务"
+											},
+											{
+												"type": "IF_ONECOLOR_HIT",
+												"title": "点击金币",
+												"data": {
+													"color": "0xd7d0bc",
+													"x1": 954,
+													"y1": 59,
+													"x2": 993,
+													"y2": 91
+												}
+											},
+											{
+												"type": "DEBUG",
+												"title": "进来签到任务"
+											},
+											{
+												"type": "WHILE_CONTROLLER",
+												"title": "等待进入到签到页",
+												"data": {
+													"until_var": "waitqiandao",
+													"main": [{
+														"type": "IF_MORECOLOR_DO",
+														"title": "判断是否进入页面",
 														"data": {
-															"until_var": "stop_qiandao",
+															"color": "0xe65430",
+															"others": "-6|-1|0xe58819,7|0|0xed832a",
+															"x1": 836,
+															"y1": 89,
+															"x2": 878,
+															"y2": 140,
 															"main": [{
+																	"type": "DEBUG",
+																	"title": "成功进到签到页面"
+																},
+
+															    {
 																"type": "IF_MORECOLOR_DO",
-																"title": "找签到页面",
+																"title": "开宝箱",
 																"data": {
-																	"main": [{
+																	"main": [
+																	    {
 																			"type": "DEBUG",
-																			"title": "检测到可以签到"
+																			"title": "检测到可开宝箱"
 																		},
-																		{
-																			"type": "IF_MORECOLOR_HIT",
-																			"title": "点击签到",
-																			"data": {
-																				"color": "0x724400",
-																				"others": "0|-5|0xfad97e,-1|6|0xfad97e",
-																				"x1": 299,
-																				"y1": 1283,
-																				"x2": 762,
-																				"y2": 1443
-																			}
-																		},
+                                                                        {
+                                                                			"type": "IF_MORECOLOR_HIT",
+                                                                			"title": "开宝箱",
+                                                                			"data": {
+                                                                				"color": "0xff5b17",
+                                                                				"others": "-40|7|0xfff076,16|9|0xfff076,31|12|0xff2f40,54|6|0xffed75",
+                                                                				"x1": 847,
+                                                                				"y1": 1749,
+                                                                				"x2": 1036,
+                                                                				"y2": 1792
+                                                                			}
+                                                                		},
 																		{
 																			"type": "TIMER",
-																			"title": "等待1秒",
+																			"title": "等待2秒",
 																			"data": {
-																				"time": 1000
+																				"time": 2000
 																			}
 																		},
-																		{
-																			"type": "SETVAR",
-																			"title": "设置已签到",
+																		
+																		
+																		    {
+																			"type": "IF_MORECOLOR_DO",
+																			"title": "找看视频再领取",
 																			"data": {
-																				"input_var": "stop_qiandao"
+																				"main": [{
+																						"type": "DEBUG",
+																						"title": "开宝箱检测到可以看视频领取"
+																					},
+																					{
+																						"type": "IF_MORECOLOR_HIT",
+																						"title": "点击看视频",
+																						"data": {
+																							"color": "0xf76722",
+																							"others": "-8|1|0xfdfffe,8|1|0xfffffe,19|2|0xfdfffd",
+																							"x1": 574,
+																							"y1": 1192,
+																							"x2": 653,
+																							"y2": 1258
+																						}
+																					},
+																					{
+																						"type": "TIMER",
+																						"title": "等待30秒",
+																						"data": {
+																							"time": 30000
+																						}
+																					},
+																					{
+																						"type": "WHILE_CONTROLLER",
+																						"title": "不停",
+																						"data": {
+																							"until_var": "stop_kanshipingbaoxiangguanbi",
+																							"main": [{
+																								"type": "IF_MORECOLOR_DO",
+																								"title": "找可以关闭视频的按钮",
+																								"data": {
+																									"main": [{
+																											"type": "DEBUG",
+																											"title": "检测到可以关闭视频的按钮"
+																										},
+                                                                                                        {
+                                                                                                			"type": "IF_MORECOLOR_HIT",
+                                                                                                			"title": "点击视频看完后关闭",
+                                                                                                			"data": {
+                                                                                                				"color": "0xfcfcfc",
+                                                                                                				"others": "-3|-2|0xedeeee,2|3|0xececed,-3|3|0xececed",
+                                                                                                				"x1": 945,
+                                                                                                				"y1": 79,
+                                                                                                				"x2": 988,
+                                                                                                				"y2": 122
+                                                                                                			}
+                                                                                                		},
+																										{
+																											"type": "SETVAR",
+																											"title": "设置已关视频",
+																											"data": {
+																												"input_var": "stop_kanshipingbaoxiangguanbi"
+																											}
+																										}
+																									],
+						                                                                         "color": "0xfcfcfc",
+                                                                                    				"others": "-3|-2|0xedeeee,2|3|0xececed,-3|3|0xececed",
+                                                                                    				"x1": 945,
+                                                                                    				"y1": 79,
+                                                                                    				"x2": 988,
+                                                                                    				"y2": 122
+																								}
+																							}]
+																						}
+																					},
+
+
+																					{
+																						"type": "SETVAR",
+																						"title": "设置已开宝箱看视频",
+																						"data": {
+																							"input_var": "stop_kanshipingbaoxiang"
+																						}
+																					}
+																				],
+																				"color": "0xf76722",
+																				"others": "-8|1|0xfdfffe,8|1|0xfffffe,19|2|0xfdfffd",
+																				"x1": 574,
+																				"y1": 1192,
+																				"x2": 653,
+																				"y2": 1258
 																			}
 																		},
+																		
+																		
+
 																		{
 																			"type": "BACK",
 																			"title": "回退一步"
 																		}
 																	],
-																	"color": "0x724400",
-																	"others": "0|-5|0xfad97e,-1|6|0xfad97e",
-																	"x1": 299,
-																	"y1": 1283,
-																	"x2": 762,
-																	"y2": 1443
+																	"color": "0xff5b17",
+                                                    				"others": "-40|7|0xfff076,16|9|0xfff076,31|12|0xff2f40,54|6|0xffed75",
+                                                    				"x1": 847,
+                                                    				"y1": 1749,
+                                                    				"x2": 1036,
+                                                    				"y2": 1792
 																}
-															}]
+															},
+	                                                            {
+																			"type": "TIMER",
+																			"title": "等待2秒",
+																			"data": {
+																				"time": 2000
+																			}
+																		},
+																{
+																	"type": "SETVAR",
+																	"title": "设置轮询签到页结束",
+																	"data": {
+																		"input_var": "waitqiandao"
+																	}
+																},
+																{
+																	"type": "DEBUG",
+																	"title": "执行完任务判断"
+																},
+																{
+																	"type": "BACK",
+																	"title": "回退一步"
+																}
+															]
 														}
-													},
-													{
-														"type": "TIMER",
-														"title": "等待1秒",
-														"data": {
-															"time": 1000
-														}
-													},
-													{
-														"type": "BACK",
-														"title": "回到小说页面"
-													},
-													{
-														"type": "SETVAR",
-														"title": "完成任务",
-														"data": {
-															"input_var": "isrenwu"
-														}
-													}
-												]
+													}]
+												}
 											}
-										},
-										{
-											"type": "IF_ONECOLOR_DO",
-											"title": "不停刷小说",
-											"data": {
-												"main": [{
-													"type": "TOUCH_MOVE",
-													"title": "刷小说",
+										]
+									}
+								},
+								{
+									"type": "SETVAR",
+									"title": "重置签到轮询",
+									"data": {
+										"input_var": "waitqiandao",
+										"ifnot": true
+									}
+								},
+								{
+									"type": "TOUCH_MOVE",
+									"title": "刷小说",
+									"data": {
+										"x1": 865,
+										"y1": 977,
+										"x2": 214,
+										"y2": 977
+									}
+								},
+								{
+									"type": "IF_MORECOLOR_HIT",
+									"title": "随时关闭完成任务",
+									"data": {
+										"color": "0xc1af91",
+										"others": "0|-10|0xfff3de,10|-1|0xfff3de,-1|8|0xfff3de",
+										"x1": 84,
+										"y1": 917,
+										"x2": 137,
+										"y2": 966
+									}
+								},
+								{
+									"type": "IF_MORECOLOR_HIT",
+									"title": "随时关闭今日领取",
+									"data": {
+										"color": "0xbbbcbd",
+										"others": "0|-10|0xffffff,8|1|0xffffff,-1|9|0xffffff,-11|0|0xffffff",
+										"x1": 69,
+										"y1": 1195,
+										"x2": 123,
+										"y2": 1248
+									}
+								},
+            					{
+            						"type": "IF_MORECOLOR_DO",
+            						"title": "是否有广告",
+            						"data": {
+            							"color": "0xf76921",
+            							"others": "-64|-56|0xf7f0d6,55|-64|0xf7f0d6,15|66|0xf7f0d6",
+            							"x1": 83,
+            							"y1": 1345,
+            							"x2": 259,
+            							"y2": 1489,
+            							"main": [
+												{
+													"type": "TIMER",
+													"title": "等待5秒",
 													"data": {
-														"x1": 865,
-														"y1": 977,
-														"x2": 214,
-														"y2": 977
+														"time": 5000
 													}
-												}],
-												"color": "0xd7d0bc",
-												"x1": 778,
-												"y1": 33,
-												"x2": 872,
-												"y2": 115
-											}
-										}
-									]
+												}
+            							]
+            						}
+            					}
+
+							]
+						}
+					},
+
+					{
+						"type": "IF_MORECOLOR_DO",
+						"title": "是否回到首页",
+						"data": {
+
+							"color": "0x191919",
+							"others": "1|-7|0xf6f6f6,12|2|0xf6f6f6,-6|3|0xf6f6f6",
+							"x1": 822,
+							"y1": 154,
+							"x2": 894,
+							"y2": 221,
+							"main": [
+							    
+							    
+							    {
+								"type": "IF_MORECOLOR_HIT",
+								"title": "重新点看小说",
+								"data": {
+									"color": "0xdcad6d",
+									"others": "-5|0|0xffffff,1|-6|0xdcad6d,1|12|0xdcad6d",
+									"x1": 261,
+									"y1": 638,
+									"x2": 286,
+									"y2": 682
 								}
-							}
-						],
-						"color": "0xd7d0bc",
-						"x1": 778,
-						"y1": 33,
-						"x2": 872,
-						"y2": 115
+							}]
+						}
+					},
+					{
+						"type": "IF_MORECOLOR_DO",
+						"title": "是否首页黑暗",
+						"data": {
+							"color": "0xffffff",
+							"others": "7|0|0x4c4c4c,0|7|0x4c4c4c,-9|-1|0x4c4c4c",
+							"x1": 521,
+							"y1": 1491,
+							"x2": 560,
+							"y2": 1538,
+							"main": [
+							    {
+								"type": "IF_MORECOLOR_HIT",
+								"title": "点击关闭弹窗",
+								"data": {
+        							"color": "0xffffff",
+        							"others": "7|0|0x4c4c4c,0|7|0x4c4c4c,-9|-1|0x4c4c4c",
+        							"x1": 521,
+        							"y1": 1491,
+        							"x2": 560,
+        							"y2": 1538
+								}
+							}]
+						}
 					}
-				}]
-			}
-		},
-		{
-			"type": "WHILE_CONTROLLER",
-			"title": "不停拖动",
-			"data": {
-				"until_var": "stop1",
-				"main": [
-				    {
-					"type": "IF_ONECOLOR_DO",
-					"title": "不停刷小说",
-					"data": {
-						"main": [{
-							"type": "TOUCH_MOVE",
-							"title": "刷小说",
-							"data": {
-								"x1": 865,
-								"y1": 977,
-								"x2": 214,
-								"y2": 977
-							}
-						}],
-						"color": "0xd7d0bc",
-						"x1": 778,
-						"y1": 33,
-						"x2": 872,
-						"y2": 115
-					}
-				}
 				]
-			}
-		},
-		{
-			"type": "TOUCH_MOVE",
-			"title": "拖动",
-			"data": {
-				"x1": 865,
-				"y1": 977,
-				"x2": 214,
-				"y2": 977
-			}
-		},
-		{
-			"type": "TIMER",
-			"title": "等待2秒",
-			"data": {
-				"time": 2000
 			}
 		}
 	]

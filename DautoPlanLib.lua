@@ -190,6 +190,7 @@ function IF_ONECOLOR_HIT(mainObj)
                 mainObj.data.y1,
                 mainObj.data.x2,
                 mainObj.data.y2)
+            Dlog('点击判断结束')
             if x >-1 or y > -1 then
                 Dlog(mainObj.title..': ('..x..','..y..')')
                 touchDown(0,x,y)
@@ -220,7 +221,9 @@ function IF_MORECOLOR_HIT(mainObj)
                 mainObj.data.y1,
                 mainObj.data.x2,
                 mainObj.data.y2)
+
             if x >-1 or y > -1 then
+                Dlog(mainObj.title..': ('..x..','..y..')')
                 touchDown(0,x,y)
                 mSleep(DEFAULT_HIT_TIME)
                 touchUp(0,x,y)
@@ -305,16 +308,87 @@ function IF_MORECOLOR_DO(mainObj)
            
     end
 end
-snum = 1
+
+-- 设置变量
 function SETVAR(mainObj)
-	if (not(mainObj.data) or not(mainObj.data.input_var) or not(type(mainObj.data.input_var)=='string'))
+	if (not(mainObj.data) or not(mainObj.data.input_var) 
+	    or not(type(mainObj.data.input_var)=='string'))
     then
             Dlog('SETVAR 参数错误')
         else
-            VARS[mainObj.data.input_var]=true
+            if(  mainObj.data.ifnot == true ) then
+                -- Dlog('设置为false '..mainObj.data.input_var)
+                VARS[mainObj.data.input_var]=false
+                else
+                -- Dlog('设置为true '..mainObj.data.input_var)
+                VARS[mainObj.data.input_var]=true
+            end
     end
 end
- 
+
+-- 打开APP
+function RUNAPPPACKAGE(mainObj)
+	if (not(mainObj.data) or not(mainObj.data.package_name) 
+	    or not(type(mainObj.data.package_name)=='string'))
+    then
+            Dlog('RUNAPPPACKAGE 参数错误')
+        else
+            local r = runApp(mainObj.data.package_name)
+            mSleep(1 * 1000);
+            if not( r == 0) then
+                Dlog('启动失败');
+            end
+    end
+end
+
+
+-- 每个多少时间就执行
+function DO_EVERY(mainObj)
+	if (not(mainObj.data) 
+	    or not(mainObj.data.main)
+	    or not(mainObj.data.timer)
+	    or not(mainObj.data.name)
+	    )
+    then
+            Dlog('DO_EVERY 参数错误')
+        else
+            -- 上次时间
+            if not(type(VARS[mainObj.data.name]) =='number') then
+                VARS[mainObj.data.name] = os.time();
+            end
+            local last_time = VARS[mainObj.data.name];
+            local diff = os.time() - last_time;
+            if (diff>mainObj.data.timer)then
+                -- 达到时间了
+                
+                --准备main
+                local sub_main = mainObj.data.main;
+                 for i=1,#sub_main,1 do
+                    if doThing[sub_main[i].type] 
+                    then
+                        mSleep(scriptBreathTime)
+                        local fn = doThing[sub_main[i].type]
+                        fn(sub_main[i])
+                        else
+                            Dlog('动作参数错误：动作 '..sub_main[i].title.." 不存在")
+                    end
+                 end
+                 VARS[mainObj.data.name] = os.time();
+                
+                else
+                --还没达到时间
+                
+            end
+                
+            
+    end
+end
+
+-- 结束脚本
+function DIE(mainObj)
+    Dlog('脚本执行结束');
+    luaExit();
+end
  
 doThing = {
 	DEBUG = DEBUG,
@@ -330,6 +404,9 @@ doThing = {
 	IF_MORECOLOR_HIT = IF_MORECOLOR_HIT,
 	IF_ONECOLOR_DO = IF_ONECOLOR_DO,
 	IF_MORECOLOR_DO = IF_MORECOLOR_DO,
-	BACK = BACK
+	BACK = BACK,
+	DO_EVERY = DO_EVERY,
+	DIE = DIE,
+	RUNAPPPACKAGE = RUNAPPPACKAGE
 }
  
