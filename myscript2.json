@@ -2,10 +2,16 @@
 	"scripName": "测试脚本2",
 	"breathTime": 50,
 	"initScreen": 0,
-	"main": [{
+	"main": [
+	    {
 			"type": "DEBUG",
 			"title": "debug 测试1"
 		},
+
+				
+								
+
+
 		{
 		    "type":"RUNAPPPACKAGE",
 		    "title": "启动主app",
@@ -31,9 +37,9 @@
 							"main": [
 							    {
 									"type": "DO_EVERY",
-									"title": "每60秒运行一次看宝箱任务",
+									"title": "每60*5秒运行一次看宝箱任务",
 									"data": {
-										"timer": 60,
+										"timer": 300,
 										"name": "every3sec",
 										"main": [{
 												"type": "DEBUG",
@@ -87,12 +93,12 @@
                                                                 			"type": "IF_MORECOLOR_HIT",
                                                                 			"title": "开宝箱",
                                                                 			"data": {
-                                                                				"color": "0xff5b17",
-                                                                				"others": "-40|7|0xfff076,16|9|0xfff076,31|12|0xff2f40,54|6|0xffed75",
-                                                                				"x1": 847,
-                                                                				"y1": 1749,
-                                                                				"x2": 1036,
-                                                                				"y2": 1792
+                                                                    			"color": "0xfff076",
+                                                                    			"others": "3|-1|0xff5b17,-4|2|0xff5125,0|-5|0xfff076,0|14|0xff2246",
+                                                                    			"x1": 845,
+                                                                    			"y1": 1626,
+                                                                    			"x2": 1037,
+                                                                    			"y2": 1665
                                                                 			}
                                                                 		},
 																		{
@@ -108,7 +114,8 @@
 																			"type": "IF_MORECOLOR_DO",
 																			"title": "找看视频再领取",
 																			"data": {
-																				"main": [{
+																				"main": [
+																				    {
 																						"type": "DEBUG",
 																						"title": "开宝箱检测到可以看视频领取"
 																					},
@@ -126,9 +133,9 @@
 																					},
 																					{
 																						"type": "TIMER",
-																						"title": "等待30秒",
+																						"title": "等待25秒",
 																						"data": {
-																							"time": 30000
+																							"time": 25000
 																						}
 																					},
 																					{
@@ -148,12 +155,12 @@
                                                                                                 			"type": "IF_MORECOLOR_HIT",
                                                                                                 			"title": "点击视频看完后关闭",
                                                                                                 			"data": {
-                                                                                                				"color": "0xfcfcfc",
-                                                                                                				"others": "-3|-2|0xedeeee,2|3|0xececed,-3|3|0xececed",
-                                                                                                				"x1": 945,
-                                                                                                				"y1": 79,
-                                                                                                				"x2": 988,
-                                                                                                				"y2": 122
+                                                                                                                 "color": "0xffffff",
+                                                                                                    				"others": "0|-3|0xf4f3f3,0|2|0xe8e7e7,-2|0|0xf3f3f3",
+                                                                                                    				"x1": 977,
+                                                                                                    				"y1": 78,
+                                                                                                    				"x2": 1013,
+                                                                                                    				"y2": 117
                                                                                                 			}
                                                                                                 		},
 																										{
@@ -164,12 +171,12 @@
 																											}
 																										}
 																									],
-						                                                                         "color": "0xfcfcfc",
-                                                                                    				"others": "-3|-2|0xedeeee,2|3|0xececed,-3|3|0xececed",
-                                                                                    				"x1": 945,
-                                                                                    				"y1": 79,
-                                                                                    				"x2": 988,
-                                                                                    				"y2": 122
+                                                                                                     "color": "0xffffff",
+                                                                                        				"others": "0|-3|0xf4f3f3,0|2|0xe8e7e7,-2|0|0xf3f3f3",
+                                                                                        				"x1": 977,
+                                                                                        				"y1": 78,
+                                                                                        				"x2": 1013,
+                                                                                        				"y2": 117
 																								}
 																							}]
 																						}
@@ -200,12 +207,12 @@
 																			"title": "回退一步"
 																		}
 																	],
-																	"color": "0xff5b17",
-                                                    				"others": "-40|7|0xfff076,16|9|0xfff076,31|12|0xff2f40,54|6|0xffed75",
-                                                    				"x1": 847,
-                                                    				"y1": 1749,
-                                                    				"x2": 1036,
-                                                    				"y2": 1792
+                                                        			"color": "0xfff076",
+                                                        			"others": "3|-1|0xff5b17,-4|2|0xff5125,0|-5|0xfff076,0|14|0xff2246",
+                                                        			"x1": 845,
+                                                        			"y1": 1626,
+                                                        			"x2": 1037,
+                                                        			"y2": 1665
 																}
 															},
 	                                                            {
@@ -246,6 +253,95 @@
 										"ifnot": true
 									}
 								},
+								
+                                                                        {
+                                                                			"type": "IF_MORECOLOR_DO",
+                                                                			"title": "是否可以看视频300金币",
+                                                                			"data": {
+                                                                    			"color": "0x837255",
+                                                                    			"others": "4|-1|0xded9c5,4|4|0xded9c5,-331|1|0xffc256",
+                                                                    			"x1": 338,
+                                                                    			"y1": 1665,
+                                                                    			"x2": 741,
+                                                                    			"y2": 1738,
+                                                                    			"main":[
+                                        												{
+                                        													"type": "TIMER",
+                                        													"title": "等待1秒",
+                                        													"data": {
+                                        														"time": 1000
+                                        													}
+                                        												},
+                                                                                        {
+                                                                                			"type": "IF_MORECOLOR_HIT",
+                                                                                			"title": "点击看视频",
+                                                                                			"data": {
+                                                                                    			"color": "0x837255",
+                                                                                    			"others": "4|-1|0xded9c5,4|4|0xded9c5,-331|1|0xffc256",
+                                                                                    			"x1": 338,
+                                                                                    			"y1": 1665,
+                                                                                    			"x2": 741,
+                                                                                    			"y2": 1738
+                                                                                			}
+                                                                                		},
+																					{
+																						"type": "TIMER",
+																						"title": "等待25秒",
+																						"data": {
+																							"time": 25000
+																						}
+																					},
+																					{
+																						"type": "WHILE_CONTROLLER",
+																						"title": "不停",
+																						"data": {
+																							"until_var": "stop_kanshipingbaoxiangguanbi",
+																							"main": [{
+																								"type": "IF_MORECOLOR_DO",
+																								"title": "找可以关闭视频的按钮",
+																								"data": {
+																									"main": [{
+																											"type": "DEBUG",
+																											"title": "检测到可以关闭视频的按钮"
+																										},
+                                                                                                        {
+                                                                                                			"type": "IF_MORECOLOR_HIT",
+                                                                                                			"title": "点击视频看完后关闭",
+                                                                                                			"data": {
+                                                                                                                 "color": "0xffffff",
+                                                                                                    				"others": "0|-3|0xf4f3f3,0|2|0xe8e7e7,-2|0|0xf3f3f3",
+                                                                                                    				"x1": 977,
+                                                                                                    				"y1": 78,
+                                                                                                    				"x2": 1013,
+                                                                                                    				"y2": 117
+                                                                                                			}
+                                                                                                		},
+																										{
+																											"type": "SETVAR",
+																											"title": "设置已关视频",
+																											"data": {
+																												"input_var": "stop_kanshipingbaoxiangguanbi"
+																											}
+																										}
+																									],
+                                                                                                     "color": "0xffffff",
+                                                                                        				"others": "0|-3|0xf4f3f3,0|2|0xe8e7e7,-2|0|0xf3f3f3",
+                                                                                        				"x1": 977,
+                                                                                        				"y1": 78,
+                                                                                        				"x2": 1013,
+                                                                                        				"y2": 117
+																								}
+																							}]
+																						}
+																					}
+                                                                                		
+                                                                    			    
+                                                                    			    ]
+                                                                			}
+                                                                		},
+								
+								
+								
 								{
 									"type": "TOUCH_MOVE",
 									"title": "刷小说",
@@ -256,6 +352,9 @@
 										"y2": 977
 									}
 								},
+
+				
+								
 								{
 									"type": "IF_MORECOLOR_HIT",
 									"title": "随时关闭完成任务",
@@ -268,18 +367,7 @@
 										"y2": 966
 									}
 								},
-								{
-									"type": "IF_MORECOLOR_HIT",
-									"title": "随时关闭今日领取",
-									"data": {
-										"color": "0xbbbcbd",
-										"others": "0|-10|0xffffff,8|1|0xffffff,-1|9|0xffffff,-11|0|0xffffff",
-										"x1": 69,
-										"y1": 1195,
-										"x2": 123,
-										"y2": 1248
-									}
-								},
+
             					{
             						"type": "IF_MORECOLOR_DO",
             						"title": "是否有广告",
@@ -305,7 +393,32 @@
 							]
 						}
 					},
-
+					{
+						"type": "IF_MORECOLOR_HIT",
+						"title": "随时关闭今日领取",
+						"data": {
+							"color": "0xbbbcbd",
+							"others": "-1|-9|0xffffff,10|1|0xffffff,0|10|0xffffff,-9|-2|0xffffff",
+							"x1": 72,
+							"y1": 1065,
+							"x2": 121,
+							"y2": 1121
+						}
+					},
+					
+					{
+						"type": "IF_MORECOLOR_HIT",
+						"title": "随时关闭加入书架",
+						"data": {
+							"color": "0xfa6725",
+							"others": "-6|-8|0xffffff",
+							"x1": 641,
+							"y1": 990,
+							"x2": 850,
+							"y2": 1063
+						}
+					},
+					
 					{
 						"type": "IF_MORECOLOR_DO",
 						"title": "是否回到首页",
